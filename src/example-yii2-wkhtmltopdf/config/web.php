@@ -10,7 +10,7 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '',
+            'cookieValidationKey' => 'test',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -30,15 +30,39 @@ $config = [
             'useFileTransport' => true,
         ],
         'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'traceLevel' => YII_DEBUG ? 0 : 0,
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'trace'],
                 ],
             ],
         ],
         'db' => $db,
+		'htmlToPdf' => [
+			'class' => 'boundstate\htmlconverter\HtmlToPdfConverter',
+// 			'bin' => '@app/bin/wkhtmltopdf/wkhtmltopdf',
+		    'bin' => 'G:\data\projects.it\openSource\example-yii2-wkhtmltopdf\src\example-yii2-wkhtmltopdf\bin\wkhtmltopdf\wkhtmltopdf',
+			// global wkhtmltopdf command line options
+			// (see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt)
+			'options' => [
+				'print-media-type',
+				'disable-smart-shrinking',
+				'no-outline',
+				'page-size' => 'A4',
+				'load-error-handling' => 'ignore',
+				'load-media-error-handling' => 'ignore'
+			],
+		],
+		'response' => [
+			'formatters' => [
+				'pdf' => [
+					'class' => 'boundstate\htmlconverter\PdfResponseFormatter',
+					// Set a filename to download the response as an attachments (instead of displaying in browser)
+					'filename' => 'attachment.pdf'
+				],
+			]
+		],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
