@@ -15,38 +15,37 @@ class DemoWkhtmltopdfController extends Controller
      */
     public function actionIndex()
     {
-        $provider = new ArrayDataProvider([
-            'allModels' => $this->peopleDataList(),
-            'sort' => [
-                'attributes' => ['id', 'name', 'age', 'height'],
-            ],
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
-        return $this->render('dataView', ['dataProvider' => $provider]);
+        return $this->render('dataView', ['dataProvider' => $this->dataProvider()]);
     }
-
-	public function actionPdf()
+    
+    public function actionPdfLink()
+    {
+        $this->layout = 'pdf';
+        return $this->render('dataView', ['dataProvider' => $this->dataProvider()]);
+    }
+    
+	public function actionPdfDownload()
 	{
-	    $this->layout = 'pdf';
-	    $provider = new ArrayDataProvider([
+	    Yii::$app->html2pdf
+	    ->convertFile('http://projects.local/openSource/example-yii2-wkhtmltopdf/src/example-yii2-wkhtmltopdf/web/index.php?r=demo-wkhtmltopdf%2Fpdf-link')
+	    ->saveAs('G:\data\projects.it\openSource\example-yii2-wkhtmltopdf\src\example-yii2-wkhtmltopdf\bin\wkhtmltopdf\output.pdf');
+	}
+	
+	/**
+	 * Generate data provider
+	 * @return \yii\data\ArrayDataProvider
+	 */
+	private function dataProvider()
+	{
+	    return new ArrayDataProvider([
 	        'allModels' => $this->peopleDataList(),
 	        'sort' => [
 	            'attributes' => ['id', 'name', 'age', 'height'],
 	        ],
 	        'pagination' => [
-	            'pageSize' => 10,
+	            'pageSize' => 50,
 	        ],
 	    ]);
-	    $html = $this->render('dataView', ['dataProvider' => $provider]);
-	    return $html;
-	    $header = $this->render('pdfHeader');
-// 		Yii::$app->response->format = 'pdf';
-		$pdf = Yii::$app->htmlToPdf->convert($html, ['header-html' => $header]);
-// 		file_put_contents('a.pdf', $pdf);
- 		return $pdf;
-		
 	}
 	
 	/**
@@ -54,7 +53,7 @@ class DemoWkhtmltopdfController extends Controller
 	 * @param integer $num Number of people to be generated.
 	 * @return array[] Each element contains name, age and height.
 	 */
-	private function peopleDataList($num = 30)
+	private function peopleDataList($num = 100)
 	{
 		$people = [];
 		$familyNames = [

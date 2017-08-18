@@ -18,7 +18,8 @@
         "yiisoft/yii2": "~2.0.5",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "boundstate/yii2-htmlconverter": "*"
+        "boundstate/yii2-htmlconverter": "*",
+        "yii2tech/html2pdf": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

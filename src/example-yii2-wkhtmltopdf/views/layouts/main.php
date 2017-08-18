@@ -38,7 +38,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Web', 'url' => ['/demo-wkhtmltopdf/index']],
-            ['label' => 'Pdf', 'url' => ['/demo-wkhtmltopdf/pdf']],
+            ['label' => 'PdfLink', 'url' => ['/demo-wkhtmltopdf/pdf-link']],
+            ['label' => 'PdfDownload', 'url' => ['/demo-wkhtmltopdf/pdf-download']],
         ],
     ]);
     NavBar::end();

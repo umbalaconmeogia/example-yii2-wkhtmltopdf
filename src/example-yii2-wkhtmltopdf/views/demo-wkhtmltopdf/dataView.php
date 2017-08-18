@@ -15,3 +15,20 @@ use yii\grid\GridView;
         ],
     ]); ?>
 </div>
+<h2>Test measure unit</h2>
+<table class="table-bordered">
+  <colgroup>
+      <col style="width: 1cm;" />
+      <col style="width: 2cm;" />
+      <col style="width: 3cm;" />
+      <col style="width: 4cm;" />
+      <col style="width: 5cm;" />
+  </colgroup>
+  <tr>
+      <td>Col 1</td>
+      <td>Col 2</td>
+      <td>Col 3</td>
+      <td>Col 4</td>
+      <td>Col 5</td>
+  </tr>
+</table>

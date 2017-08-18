@@ -39,7 +39,12 @@ $config = [
             ],
         ],
         'db' => $db,
-		'htmlToPdf' => [
+        'html2pdf' => [
+            'class' => 'yii2tech\html2pdf\Manager',
+            'viewPath' => '@app/pdf',
+            'converter' => 'wkhtmltopdf',
+        ],
+        'htmlToPdf' => [
 			'class' => 'boundstate\htmlconverter\HtmlToPdfConverter',
 // 			'bin' => '@app/bin/wkhtmltopdf/wkhtmltopdf',
 		    'bin' => 'G:\data\projects.it\openSource\example-yii2-wkhtmltopdf\src\example-yii2-wkhtmltopdf\bin\wkhtmltopdf\wkhtmltopdf',
